@@ -1,0 +1,15 @@
+.container {
+  border: 1px solid black;
+}
+
+.title {
+  color: red;
+}
+
+.text {
+  color: blue;
+}
+
+.count {
+  color: green;
+}
