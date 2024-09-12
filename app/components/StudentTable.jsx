@@ -1,5 +1,6 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import classes from "./student-table-styles.module.css"
 
 function StudentTable() {
     // Array of students state
@@ -15,14 +16,22 @@ function StudentTable() {
         setStudents(resJSON)
     }
 
+    // You can use a side effect to the page loading by entering an empty [] dependency array
+    useEffect(() => {
+        getAllStudents()
+    }, [])
+
     return (
         <div>
+            <h2>Students Table</h2>
             <button onClick = {getAllStudents}>
-                Load all Students
+                Reload
             </button>
-            <table>
-                <tbody>
-                <tr>
+            <br/>
+            <br/>
+            <table className={classes.table}>
+                <tbody >
+                <tr className = {classes.row}>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Class Year</th>
@@ -30,12 +39,12 @@ function StudentTable() {
                 </tr>
             {
                 students.map((student) => 
-                <tr key={student.id}>
-                    <td>{student.firstName}</td>
-                    <td>{student.lastName}</td>
-                    <td>{student.classYear}</td>
-                    <td>{student.concentrations.join(", ")}</td>
-                </tr>
+                    <tr key={student.id} className={classes.row}>
+                        <td>{student.firstName}</td>
+                        <td>{student.lastName}</td>
+                        <td>{student.classYear}</td>
+                        <td>{student.concentrations.join(", ")}</td>
+                    </tr>
                 )
             }
                 </tbody>

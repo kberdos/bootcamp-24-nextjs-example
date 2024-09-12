@@ -17,12 +17,16 @@ function NewStudentForm() {
             },
             body: JSON.stringify(newStudentBody)
         })
+        {/*
+             CHALLENGE: Can you get the table to reload whenever you call onSubmit? 
+             This may involve restructuring your project and using props!
+        */}
     }
     // NOTE: this is not the best way to collect data, but is good for demo purposes!
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [classYear, setClassYear] = useState("")
-    const [concentrations, setConcentrations] = useState(["Math"])
+    const [concentrations, setConcentrations] = useState([])
 
     return (
         <div>
@@ -56,9 +60,10 @@ function NewStudentForm() {
             <h4>Concentrations</h4>
             {
                 concentrations.map((concentration, i) => 
-                    <>
+                    <div key={i}>
                     <input 
                     value={concentration}
+                    placeholder="History"
                     onChange={(event) => setConcentrations(concentrations.map((c, j) => {
                         // TERNARY STATEMENT: return two different things based on a conditional
                         return i === j ? event.target.value : c 
@@ -66,7 +71,7 @@ function NewStudentForm() {
                 )}
                     />
                     <br/><br/>
-                    </>
+                    </div>
                 )
             }
             <button onClick = {() => setConcentrations(Array(...concentrations, ""))}>
